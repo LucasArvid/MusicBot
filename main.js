@@ -1,6 +1,7 @@
 const { Client, Intents, Message, MessageEmbed, DiscordAPIError, Collection, Discord } = require('discord.js');
 
 require("dotenv").config();
+const config = require("./config.json");
 
 const client = new Client({intents : [Intents.FLAGS.GUILD_MESSAGES , Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES]});
 
@@ -14,4 +15,4 @@ client.events = new Collection();
     require(`./handlers/${handler}`)(client, Discord);
 });
 
-client.login(process.env.TOKEN);
+client.login(config.TOKEN);
