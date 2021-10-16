@@ -17,6 +17,8 @@
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
     "node": "^16.10.0",
+    "scdl-core": "^1.0.18",
+    "soundcloud-downloader": "^1.0.0",
     "yt-search": "^2.10.1",
     "ytdl-core": "^4.9.1"
   }
