@@ -56,7 +56,8 @@ module.exports = {
                 }
                 else
                 {
-                    message.channel.send("Song not found");
+                    message.channel.send("Song not found")
+                    .catch(err => console.error(err));
                 }
 
             }
@@ -80,7 +81,7 @@ module.exports = {
                 {
                     const connection = await voiceChannel.join();
                     queue_constructor.connection = connection;
-                    video_player( message.guild, queue_constructor.songs[0])
+                    await video_player( message.guild, queue_constructor.songs[0])
                 }
                 catch( err )
                 {
@@ -120,17 +121,18 @@ const video_player = async ( guild, song ) =>
         highWaterMark: 1 << 25,
      })
      .on("error", err =>{
+        message.channel.send("There was an error with ytdl");
         console.log(err);
     });
 
     song_queue.connection.play( stream, { seek: 0, volume: 1 })
     .on("finish", () =>
     {
-        console.log("song ended");
         song_queue.songs.shift();
         video_player( guild, song_queue.songs[0]);
     })
     .on("error", err =>{
+        message.channel.send("There was an error with .connection.play {stream}");
         console.log(err);
     });
 
